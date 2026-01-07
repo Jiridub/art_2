@@ -149,3 +149,29 @@
     disableForm(false);
   });
 })();
+// --- Parallax artwork layer across bricks (safe, requestAnimationFrame) ---
+(function () {
+  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReduced) return;
+
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    const y = window.scrollY || 0;
+
+    // negative -> image moves slower than content (premium parallax feel)
+    const parallax = Math.round(y * -0.12);
+
+    document.documentElement.style.setProperty("--art-y", parallax + "px");
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  update();
+})();
