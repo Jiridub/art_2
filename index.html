@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!doctype html>
 <html lang="cs">
 <head>
@@ -10,26 +9,17 @@
   <meta name="description" content="doplnit_SEO_DESCRIPTION" />
   <link rel="canonical" href="doplnit_CANONICAL_URL" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="doplnit_OG_TITLE" />
   <meta property="og:description" content="doplnit_OG_DESCRIPTION" />
   <meta property="og:url" content="doplnit_OG_URL" />
   <meta property="og:image" content="doplnit_OG_IMAGE_URL" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="doplnit_OG_IMAGE_URL" />
 
-  <!-- Favicons -->
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="doplnit_APPLE_TOUCH_ICON_180" />
+  <link rel="icon" href="./favicon.ico" />
 
-  <!-- Preload background image -->
-  <link rel="preload" as="image" href="./images/IMG_2033.jpeg" />
-
-  <!-- Styles -->
+  <link rel="preload" as="image" href="./images/IMG_2033.jpeg" fetchpriority="high">
   <link rel="stylesheet" href="./style.css" />
 
-  <!-- Structured data (minimal; rozšíříme později) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -37,150 +27,166 @@
     "name": "doplnit_PERSON_NAME",
     "url": "doplnit_SITE_URL",
     "jobTitle": "doplnit_JOB_TITLE",
-    "telephone": "doplnit_PHONE_E164",
-    "email": "doplnit_EMAIL",
     "areaServed": "CZ",
-    "knowsAbout": ["art market", "art collecting", "valuation", "due diligence", "portfolio building"],
     "sameAs": ["doplnit_LINKEDIN_URL"]
   }
   </script>
 </head>
 
 <body>
-  <div class="wrap">
-    <header class="topbar">
-      <a class="brand" href="/" aria-label="doplnit_BRAND_ARIA">
-        <strong>doplnit_BRAND_NAME</strong>
-        <span>doplnit_BRAND_SUBTITLE</span>
-      </a>
+<div class="wrap">
 
-      <nav class="top-actions" aria-label="Navigace">
-        <a class="btn" href="#pro-investory">Pro investory</a>
-        <a class="btn primary" href="#konzultace">Domluvit konzultaci</a>
-      </nav>
-    </header>
+<header class="topbar">
+  <a class="brand" href="./">
+    <strong>doplnit_BRAND_NAME</strong>
+    <span>doplnit_BRAND_SUBTITLE</span>
+  </a>
+  <nav class="top-actions">
+    <a class="btn" href="#pro-investory">Pro investory</a>
+    <a class="btn primary" href="#konzultace">Domluvit konzultaci</a>
+  </nav>
+</header>
 
-    <!-- STEP 1: HERO + HLAVNÍ SEKCE -->
-    <section class="hero" aria-labelledby="heroTitle">
-      <div class="hero-bg" aria-hidden="true"></div>
+<section class="hero">
+  <div class="hero-bg"></div>
 
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <h1 id="heroTitle">doplnit_HERO_H1</h1>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <h1>doplnit_HERO_H1</h1>
+      <p class="lead">doplnit_HERO_LEAD</p>
 
-          <p class="lead">
-            doplnit_HERO_LEAD
-          </p>
+      <ul class="pill-row">
+        <li class="pill">doplnit_PILL_1</li>
+        <li class="pill">doplnit_PILL_2</li>
+        <li class="pill">doplnit_PILL_3</li>
+      </ul>
 
-          <ul class="pill-row" aria-label="Hlavní pilíře">
-            <li class="pill">doplnit_PILL_1</li>
-            <li class="pill">doplnit_PILL_2</li>
-            <li class="pill">doplnit_PILL_3</li>
-          </ul>
+      <div class="hero-actions">
+        <a class="btn primary" href="#konzultace">Nezávazná konzultace</a>
+        <a class="btn" href="#jak-pracuji">Jak pracuji</a>
+      </div>
 
-          <div class="hero-actions">
-            <a class="btn primary" href="#konzultace">Nezávazná konzultace</a>
-            <a class="btn" href="#pro-investory">Jak to funguje</a>
+      <p class="micro">doplnit_HERO_MICRO</p>
+    </div>
+
+    <aside class="card" id="konzultace">
+      <h2>Konzultace</h2>
+      <p>Krátký kontakt. Ozvu se a domluvíme další postup.</p>
+
+      <form id="leadForm" novalidate>
+        <input type="hidden" name="source" value="doplnit_FORM_SOURCE">
+        <input type="hidden" name="timestamp" id="ts">
+
+        <div class="row">
+          <div class="field">
+            <label>Jméno</label>
+            <input name="name" autocomplete="name" required>
           </div>
-
-          <p class="micro">
-            doplnit_HERO_MICRO
-          </p>
+          <div class="field">
+            <label>Telefon</label>
+            <input name="phone" autocomplete="tel" required>
+          </div>
         </div>
 
-        <aside class="card" id="konzultace" aria-labelledby="formTitle">
-          <h2 id="formTitle">Konzultace</h2>
-          <p>Krátký kontakt. Ozvu se a domluvíme termín hovoru nebo setkání.</p>
-
-          <form id="leadForm" autocomplete="on" novalidate>
-            <!-- hidden fields -->
-            <input type="hidden" name="source" value="doplnit_FORM_SOURCE" />
-            <input type="hidden" name="page" value="/" />
-            <input type="hidden" name="timestamp" id="ts" value="" />
-
-            <div class="row">
-              <div class="field">
-                <label for="name">Jméno</label>
-                <input id="name" name="name" type="text" inputmode="text" autocomplete="name" placeholder="Jan Novák" required />
-              </div>
-              <div class="field">
-                <label for="phone">Telefon</label>
-                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+420 777 000 000" required />
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="field">
-                <label for="email">E-mail</label>
-                <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="jan@firma.cz" />
-              </div>
-              <div class="field">
-                <label for="type">Zájem</label>
-                <select id="type" name="type" autocomplete="off" required>
-                  <option value="" selected disabled>Vyberte</option>
-                  <option value="b2c">Soukromý nákup</option>
-                  <option value="b2b">Firemní nákup</option>
-                  <option value="fund">Fond nebo správa majetku</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="note">Co řešíte</label>
-              <textarea id="note" name="note" autocomplete="off" placeholder="Stručně popište cíl, rozpočet a časový horizont."></textarea>
-            </div>
-
-            <div class="form-actions">
-              <button class="btn primary" id="submitBtn" type="submit">Odeslat</button>
-              <div class="status" id="status" role="status" aria-live="polite"></div>
-            </div>
-
-            <div class="fineprint">
-              Odesláním souhlasíte s tím, že vás kontaktuji kvůli domluvě konzultace.
-              Nejde o investiční doporučení ani veřejnou nabídku.
-              <a class="fineprint-link" href="doplnit_PRIVACY_URL">Zásady ochrany soukromí</a>.
-            </div>
-          </form>
-        </aside>
-      </div>
-    </section>
-
-    <main>
-      <section class="section" id="pro-investory" aria-labelledby="investorsTitle">
-        <h2 id="investorsTitle">Pro investory</h2>
-        <p>
-          doplnit_SECTION_INVESTORS_P1
-        </p>
-
-        <div class="grid3" role="list">
-          <div class="mini" role="listitem">
-            <h3>doplnit_BOX1_TITLE</h3>
-            <p>doplnit_BOX1_TEXT</p>
-          </div>
-
-          <div class="mini" role="listitem">
-            <h3>doplnit_BOX2_TITLE</h3>
-            <p>doplnit_BOX2_TEXT</p>
-          </div>
-
-          <div class="mini" role="listitem">
-            <h3>doplnit_BOX3_TITLE</h3>
-            <p>doplnit_BOX3_TEXT</p>
-          </div>
+        <div class="field">
+          <label>Co řešíte</label>
+          <textarea name="note" placeholder="doplnit_FORM_NOTE_HINT"></textarea>
         </div>
-      </section>
-    </main>
 
-    <footer class="footer">
-      <div>© <span id="y"></span> doplnit_FOOTER_NAME</div>
-      <div class="footer-links">
-        <a href="doplnit_CONTACT_LINK">Kontakt</a>
-        <span class="sep">•</span>
-        <a href="doplnit_PRIVACY_URL">Soukromí</a>
-      </div>
-    </footer>
+        <button class="btn primary" type="submit">Odeslat</button>
+        <div class="status" id="status"></div>
+
+        <div class="fineprint">
+          Nejde o investiční doporučení.
+          <a href="doplnit_PRIVACY_URL">Zásady ochrany soukromí</a>
+        </div>
+      </form>
+    </aside>
   </div>
+</section>
 
-  <script src="./app.js" defer></script>
+<main>
+
+<section class="section" id="pro-investory">
+  <h2>Pro investory</h2>
+  <p>doplnit_SECTION_INVESTORS_TEXT</p>
+</section>
+
+<!-- KROK 2: JAK PRACUJI -->
+<section class="section" id="jak-pracuji">
+  <h2>Jak pracuji</h2>
+  <p>
+    Pracuji s uměním stejně disciplinovaně, jako investoři přistupují k jiným třídám aktiv.
+    Proces je nastavený tak, aby minimalizoval dojem a maximalizoval kontrolu rozhodnutí.
+  </p>
+
+  <div class="steps">
+
+    <div class="step">
+      <span class="step-num">01</span>
+      <h3>Vymezení cíle nákupu</h3>
+      <p>
+        Na začátku si ujasníme, proč má umění vstoupit do portfolia.
+        Zda jde o dlouhodobé držení, diverzifikaci nebo reprezentaci.
+      </p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">02</span>
+      <h3>Rozpočet a časový horizont</h3>
+      <p>
+        Pracuji s minimem od 100 000 Kč.
+        Součástí rozhodnutí je i likvidita a realistický časový horizont.
+      </p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">03</span>
+      <h3>Výběr autora a kontext trhu</h3>
+      <p>
+        Posuzuji pozici autora, kontinuitu tvorby a srovnatelné prodeje.
+        U Joea Muczky Jr. vycházím z dlouhodobé znalosti jeho práce.
+      </p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">04</span>
+      <h3>Výběr konkrétních děl</h3>
+      <p>
+        Navrhuji díla, která dávají smysl k cíli nákupu i rozpočtu.
+        Rozhodování nestavím na osobním vkusu.
+      </p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">05</span>
+      <h3>Dokumentace a posudky</h3>
+      <p>
+        Součástí procesu je kontrola původu a možnost znaleckého posudku.
+        Dokumentace slouží jako opora pro rozhodnutí i budoucí obhajitelnost.
+      </p>
+    </div>
+
+    <div class="step">
+      <span class="step-num">06</span>
+      <h3>Nákup a další postup</h3>
+      <p>
+        Po nákupu řešíme instalaci, pojištění a další kroky
+        podle toho, zda jde o soukromý nebo firemní majetek.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  © <span id="y"></span> doplnit_FOOTER_NAME
+</footer>
+
+</div>
+
+<script src="./app.js" defer></script>
 </body>
 </html>
