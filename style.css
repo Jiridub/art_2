@@ -1,5 +1,8 @@
 /* style.css */
-/* Theme tuned to warm amber/copper palette + soft geometry, inspired by the provided artwork */
+/* Hybrid background:
+   - Artwork only in HERO (brand mood)
+   - Long page uses premium dark gradient + subtle texture
+   - Responsive grids avoid "1/3 right column text stacking" */
 
 :root{
   --bg0: #070607;
@@ -25,10 +28,10 @@
 
   --focus: rgba(215,162,74,0.18);
 
-  /* Background image path */
+  /* Artwork image path (used in HERO only) */
   --bg-image: url("./images/IMG_2033.jpeg");
 
-  /* extra helpers */
+  /* helpers */
   --stroke: rgba(255,255,255,0.12);
   --card: rgba(10,10,12,0.52);
   --card2: rgba(12,12,14,0.72);
@@ -43,11 +46,11 @@ body{
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
   color: var(--text);
 
-  /* Full-page background image (moves with scroll) */
-  background-image: var(--bg-image);
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
+  /* HYBRID: no full-page artwork here */
+  background:
+    radial-gradient(1200px 800px at 50% 10%, rgba(215,162,74,0.10), transparent 60%),
+    radial-gradient(900px 700px at 85% 20%, rgba(166,106,44,0.08), transparent 62%),
+    linear-gradient(180deg, #070607 0%, #0b0908 35%, #060607 100%);
   background-attachment: scroll;
 
   -webkit-font-smoothing: antialiased;
@@ -57,12 +60,7 @@ body{
   overflow-x: hidden;
 }
 
-/* Safer wrapping for long URLs/strings without killing normal Czech typography */
-p, li, .micro, .lead, .status, .fineprint{
-  overflow-wrap: break-word;
-  word-break: normal;
-}
-
+/* Premium overlays (keep) */
 body::before{
   content:"";
   position: fixed;
@@ -71,9 +69,9 @@ body::before{
   pointer-events: none;
   background:
     radial-gradient(1200px 700px at 50% 20%,
-      rgba(0,0,0,0.14), rgba(0,0,0,0.72) 70%, rgba(0,0,0,0.86)),
-    radial-gradient(1100px 700px at 20% 10%, rgba(215,162,74,0.10), transparent 62%),
-    radial-gradient(900px 650px at 85% 20%, rgba(166,106,44,0.09), transparent 62%);
+      rgba(0,0,0,0.10), rgba(0,0,0,0.60) 70%, rgba(0,0,0,0.80)),
+    radial-gradient(1100px 700px at 20% 10%, rgba(215,162,74,0.08), transparent 62%),
+    radial-gradient(900px 650px at 85% 20%, rgba(166,106,44,0.06), transparent 62%);
 }
 
 body::after{
@@ -82,11 +80,18 @@ body::after{
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.14;
+  opacity: 0.16;
   background-image:
     repeating-linear-gradient(0deg, rgba(255,255,255,0.018), rgba(255,255,255,0.018) 1px, transparent 1px, transparent 2px),
     repeating-linear-gradient(90deg, rgba(255,255,255,0.012), rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
   mix-blend-mode: overlay;
+}
+
+/* Safe wrapping for long strings (URLs, phone etc.), but not "break every word" */
+p, li, .micro, .lead, .status, .fineprint{
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
 }
 
 a{ color: inherit; text-decoration: none; }
@@ -130,7 +135,7 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   display:flex;
   gap:10px;
   align-items:center;
-  flex-wrap: wrap; /* important for smaller widths */
+  flex-wrap: wrap;
   justify-content: flex-end;
 }
 
@@ -178,20 +183,20 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   box-shadow: var(--shadow);
   border: 1px solid var(--stroke);
 
-  /* translucent brick concept */
   background: linear-gradient(180deg, rgba(10,10,12,0.46) 0%, rgba(12,12,14,0.72) 100%);
   backdrop-filter: blur(var(--blur));
   -webkit-backdrop-filter: blur(var(--blur));
 }
 
+/* Artwork lives here (not on body) */
 .hero-bg{
   position:absolute;
   inset:0;
   background-image: var(--bg-image);
   background-size: cover;
   background-position: center;
-  opacity: 0.10;
-  filter: saturate(0.98) contrast(1.06);
+  opacity: 0.16;
+  filter: saturate(1.02) contrast(1.06);
   transform: scale(1.02);
 }
 
@@ -200,26 +205,24 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   position:absolute;
   inset:0;
   background:
-    radial-gradient(900px 520px at 22% 18%, rgba(215,162,74,0.14), transparent 62%),
-    radial-gradient(820px 560px at 80% 18%, rgba(166,106,44,0.12), transparent 62%),
+    radial-gradient(900px 520px at 22% 18%, rgba(215,162,74,0.16), transparent 62%),
+    radial-gradient(820px 560px at 80% 18%, rgba(166,106,44,0.14), transparent 62%),
     linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.62) 100%);
   pointer-events:none;
 }
 
+/* Fix mid-width collapse:
+   - force min width for form card
+   - prevent narrow right column that causes "words stacked" */
 .hero-grid{
   position:relative;
   display:grid;
-
-  /* Make right card not collapse too hard on mid widths */
-  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
-
+  grid-template-columns: minmax(0, 1.25fr) minmax(360px, 0.75fr);
   gap: 16px;
   padding: 28px;
 }
 
-.hero-copy{
-  min-width: 0; /* prevents weird overflow behaviors in grid */
-}
+.hero-copy{ min-width: 0; }
 
 .hero-copy h1{
   margin:0 0 10px;
@@ -434,13 +437,12 @@ main{ margin-top: 18px; }
 }
 
 /* ================= STEPS ================= */
-
+/* This is the real fix for "text stacked in right 1/3":
+   - no fixed 3 columns
+   - cards keep a minimum width, grid decides how many fit */
 .steps{
   display:grid;
-
-  /* default: 3 columns on wide */
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 14px;
   margin-top: 18px;
 }
@@ -452,7 +454,7 @@ main{ margin-top: 18px; }
   border-radius: 14px;
   padding: 16px;
   overflow: hidden;
-  min-width: 0; /* important inside grid */
+  min-width: 0;
 }
 
 .step::before{
@@ -572,30 +574,23 @@ main{ margin-top: 18px; }
   line-height: 1.6;
 }
 
-/* ================= RESPONSIVE ================= */
+/* ================= MOBILE / BREAKPOINTS ================= */
 
-/* Mid widths: 3 -> 2 columns for steps (fixes "words under each other" issue) */
-@media (max-width: 1100px){
-  .steps{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-/* Tablet */
-@media (max-width: 920px){
+@media (max-width: 980px){
+  /* Prevent hero form becoming narrow column at this breakpoint */
   .hero-grid{
     grid-template-columns: 1fr;
     padding: 20px;
   }
   .row{ grid-template-columns: 1fr; }
-  .steps{ grid-template-columns: 1fr; }
   .topbar{ padding-bottom: 14px; }
   .wrap{ padding-top: 14px; }
-  .hero-bg{ opacity: 0.08; }
+  .hero-bg{ opacity: 0.12; }
 }
 
-/* Small phones */
 @media (max-width: 420px){
   .btn{ padding: 10px 12px; font-size: 12.5px; }
-  .pill{ white-space: normal; } /* allow wrap when really narrow */
+  .pill{ white-space: normal; }
 }
 
 /* ================= REDUCE MOTION ================= */
