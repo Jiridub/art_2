@@ -1,5 +1,5 @@
 /* style.css */
-/* Warm amber/copper palette + full-bleed background image + translucent “bricks” (cards) */
+/* Theme tuned to warm amber/copper palette + soft geometry, inspired by the provided artwork */
 
 :root{
   --bg0: #070607;
@@ -17,8 +17,6 @@
   --line2: rgba(215,162,74,0.22);
 
   --shadow: 0 18px 70px rgba(0,0,0,0.62);
-  --shadow2: 0 10px 30px rgba(0,0,0,0.45);
-
   --radius: 18px;
   --radius2: 14px;
 
@@ -36,64 +34,61 @@ html,body{ height:100%; }
 
 body{
   margin:0;
-  color: var(--text);
-  overflow-x: hidden;
-
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color: var(--text);
+
+  /* Full-page background image */
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background: linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 100%);
+  /* keep content readable on top of image */
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Global overlay + vignette + subtle grain (modern, pro, avoids banding) */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(1200px 700px at 50% 18%,
+      rgba(0,0,0,0.18), rgba(0,0,0,0.72) 70%, rgba(0,0,0,0.86)),
+    radial-gradient(1000px 650px at 20% 10%, rgba(215,162,74,0.10), transparent 60%),
+    radial-gradient(900px 650px at 85% 20%, rgba(166,106,44,0.08), transparent 62%);
+}
+
+/* Subtle grain texture */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.14;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.018), rgba(255,255,255,0.018) 1px, transparent 1px, transparent 2px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.012), rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+  mix-blend-mode: overlay;
 }
 
 a{ color: inherit; text-decoration: none; }
 a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55); }
 
-/* ====== Full-bleed background (image + overlay + vignette + grain) ====== */
-
-/* Image layer */
-body::before{
-  content:"";
-  position: fixed;
-  inset: -6vh -6vw;
-  z-index: 0;
-  background-image: var(--bg-image);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  transform: scale(1.06);
-  will-change: transform;
-  filter: saturate(0.92) contrast(1.06);
-  opacity: 0.32; /* 0.22–0.38 */
-  pointer-events: none;
-}
-
-/* Overlay + subtle amber light + vignette + grain */
-body::after{
-  content:"";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-
-  background:
-    radial-gradient(1200px 700px at 50% 18%,
-      rgba(0,0,0,0.10), rgba(0,0,0,0.70) 68%, rgba(0,0,0,0.86)),
-    radial-gradient(900px 650px at 20% 10%, rgba(215,162,74,0.08), transparent 62%),
-    radial-gradient(900px 650px at 85% 20%, rgba(166,106,44,0.07), transparent 62%),
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.015), rgba(255,255,255,0.015) 1px, transparent 1px, transparent 2px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.010), rgba(255,255,255,0.010) 1px, transparent 1px, transparent 3px);
-
-  box-shadow: inset 0 0 180px rgba(0,0,0,0.70);
-  opacity: 1;
-}
-
 .wrap{
-  position: relative;
-  z-index: 2;
   max-width: var(--max);
   margin: 0 auto;
   padding: 22px var(--pad) 60px;
+  position: relative;
+  z-index: 1; /* above background overlays */
 }
 
 /* ================= HEADER ================= */
@@ -110,6 +105,7 @@ body::after{
   display:flex;
   flex-direction:column;
   gap:2px;
+  text-decoration:none;
 }
 .brand strong{
   font-size: 14px;
@@ -132,8 +128,8 @@ body::after{
 
 .btn{
   appearance:none;
-  border:1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.16);
+  background: rgba(0,0,0,0.22);
   color: var(--text);
   border-radius: 999px;
   padding: 10px 14px;
@@ -143,15 +139,18 @@ body::after{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  transition: transform .08s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease, opacity .18s ease;
+  gap:8px;
+  transition: transform .08s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
   user-select:none;
   -webkit-tap-highlight-color: transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .btn:hover{
-  background: rgba(255,255,255,0.07);
-  border-color: rgba(255,255,255,0.26);
-  box-shadow: 0 0 0 4px rgba(255,255,255,0.05);
+  background: rgba(0,0,0,0.28);
+  border-color: rgba(215,162,74,0.28);
+  box-shadow: 0 0 0 4px rgba(215,162,74,0.06);
 }
 .btn:active{ transform: translateY(1px); }
 
@@ -160,19 +159,9 @@ body::after{
   color: #0b0c10;
   border-color: transparent;
   font-weight: 700;
-}
-.btn.primary:hover{
-  box-shadow: 0 0 0 4px rgba(215,162,74,0.10);
-}
-
-/* ================= “BRICKS” (cards) ================= */
-
-.hero,
-.section,
-.card,
-.step{
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  text-decoration:none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 /* ================= HERO ================= */
@@ -182,9 +171,12 @@ body::after{
   border-radius: var(--radius);
   overflow:hidden;
   box-shadow: var(--shadow);
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.14);
 
-  background: linear-gradient(180deg, rgba(10,10,12,0.44) 0%, rgba(12,12,14,0.58) 100%);
+  /* light translucent “brick” */
+  background: linear-gradient(180deg, rgba(10,10,12,0.44) 0%, rgba(12,12,14,0.62) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .hero-bg{
@@ -193,20 +185,20 @@ body::after{
   background-image: var(--bg-image);
   background-size: cover;
   background-position: center;
-  opacity: 0.10;
-  filter: saturate(1.0) contrast(1.05);
-  transform: scale(1.02);
+  opacity: 0.10; /* keep it subtle, global bg already exists */
+  filter: saturate(1.02) contrast(1.04);
+  transform: scale(1.03);
 }
 
 .hero::before{
   content:"";
   position:absolute;
   inset:0;
-  pointer-events:none;
   background:
-    radial-gradient(900px 520px at 20% 10%, rgba(215,162,74,0.10), transparent 62%),
-    radial-gradient(820px 560px at 85% 18%, rgba(166,106,44,0.08), transparent 62%),
+    radial-gradient(900px 520px at 22% 18%, rgba(215,162,74,0.14), transparent 62%),
+    radial-gradient(820px 560px at 80% 18%, rgba(166,106,44,0.12), transparent 62%),
     linear-gradient(180deg, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.62) 100%);
+  pointer-events:none;
 }
 
 .hero-grid{
@@ -243,12 +235,14 @@ body::after{
 
 .pill{
   border:1px solid rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.20);
   padding: 9px 12px;
   border-radius: 999px;
   color: rgba(255,255,255,0.84);
   font-size: 13px;
   line-height: 1.1;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .hero-actions{
@@ -267,14 +261,16 @@ body::after{
   max-width: 70ch;
 }
 
-/* ================= FORM CARD ================= */
+/* ================= FORM ================= */
 
 .card{
-  background: linear-gradient(180deg, rgba(10,10,12,0.58) 0%, rgba(12,12,14,0.78) 100%);
-  border: 1px solid rgba(255,255,255,0.12);
+  /* light translucent “brick” */
+  background: linear-gradient(180deg, rgba(10,10,12,0.50) 0%, rgba(12,12,14,0.72) 100%);
+  border: 1px solid rgba(255,255,255,0.14);
   border-radius: var(--radius2);
   padding: 16px;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.50);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .card h2{
@@ -292,7 +288,6 @@ body::after{
 }
 
 form{ margin:0; }
-
 .field{
   display:flex;
   flex-direction:column;
@@ -309,20 +304,22 @@ input, textarea, select{
   width:100%;
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.22);
   color: var(--text);
   padding: 12px 12px;
   font-size: 14px;
   outline: none;
   transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 textarea{ min-height: 92px; resize: vertical; }
 
 input:focus, textarea:focus, select:focus{
-  border-color: rgba(255,255,255,0.28);
-  box-shadow: 0 0 0 4px rgba(255,255,255,0.06);
-  background: rgba(255,255,255,0.05);
+  border-color: rgba(215,162,74,0.30);
+  box-shadow: 0 0 0 4px var(--focus);
+  background: rgba(0,0,0,0.26);
 }
 
 .row{
@@ -354,7 +351,7 @@ input:focus, textarea:focus, select:focus{
 }
 .fineprint-link{
   text-decoration: underline;
-  text-decoration-color: rgba(255,255,255,0.28);
+  text-decoration-color: rgba(215,162,74,0.55);
 }
 
 /* ================= SECTIONS ================= */
@@ -364,25 +361,30 @@ main{ margin-top: 18px; }
 .section{
   position: relative;
   margin-top: 18px;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.14);
   border-radius: var(--radius);
   padding: 22px;
 
-  background: linear-gradient(180deg, rgba(10,10,12,0.48) 0%, rgba(12,12,14,0.66) 100%);
-  box-shadow: 0 12px 38px rgba(0,0,0,0.45);
+  /* light translucent “brick” */
+  background: linear-gradient(180deg, rgba(10,10,12,0.42) 0%, rgba(12,12,14,0.60) 100%);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.28);
   overflow:hidden;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .section::before{
   content:"";
   position:absolute;
   inset:0;
+  border-radius: var(--radius);
   pointer-events:none;
   background:
-    radial-gradient(900px 520px at 18% 0%, rgba(215,162,74,0.06), transparent 60%),
-    radial-gradient(900px 620px at 88% 10%, rgba(166,106,44,0.05), transparent 60%),
+    radial-gradient(900px 520px at 18% 0%, rgba(215,162,74,0.10), transparent 60%),
+    radial-gradient(900px 620px at 88% 10%, rgba(166,106,44,0.08), transparent 60%),
     linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.00));
-  opacity: 1;
+  opacity: 0.9;
 }
 
 .section > *{
@@ -404,7 +406,7 @@ main{ margin-top: 18px; }
   max-width: 85ch;
 }
 
-/* ================= STEPS (Jak pracuji) ================= */
+/* ================= STEPS ================= */
 
 .steps{
   display:grid;
@@ -415,21 +417,27 @@ main{ margin-top: 18px; }
 
 .step{
   position: relative;
-  background: linear-gradient(180deg, rgba(10,10,12,0.46) 0%, rgba(12,12,14,0.66) 100%);
-  border: 1px solid rgba(255,255,255,0.10);
+
+  /* light translucent “brick” */
+  background: linear-gradient(180deg, rgba(10,10,12,0.36) 0%, rgba(12,12,14,0.54) 100%);
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 14px;
   padding: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .step::before{
   content:"";
   position:absolute;
-  inset:0;
-  pointer-events:none;
-  background: linear-gradient(90deg, rgba(215,162,74,0.10), transparent 38%, transparent 62%, rgba(166,106,44,0.08));
-  opacity: 0.35;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(215,162,74,0.45) 50%, transparent 100%);
+  opacity: 0.65;
 }
 
 .step-head{
@@ -448,10 +456,12 @@ main{ margin-top: 18px; }
   padding: 0 10px;
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.04);
-  color: rgba(255,255,255,0.86);
+  background: rgba(0,0,0,0.22);
+  color: rgba(255,255,255,0.88);
   font-size: 12px;
   letter-spacing: 0.12em;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .step h3{
@@ -491,7 +501,9 @@ main{ margin-top: 18px; }
   .steps{ grid-template-columns: 1fr; }
   .topbar{ padding-bottom: 14px; }
   .wrap{ padding-top: 14px; }
-  body::before{ opacity: 0.28; }
+
+  /* iOS sometimes ignores fixed background-attachment; keep readability via overlays */
+  body{ background-attachment: scroll; }
   .hero-bg{ opacity: 0.08; }
 }
 
