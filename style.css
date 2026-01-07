@@ -515,8 +515,14 @@ main{ margin-top: 18px; }
   flex-wrap:wrap;
 }
 
-/* ================= MOBILE ================= */
 
+/* FIX: zabrání úzké pravé třetině, kde se text láme po písmenech */
+@media (max-width: 1180px){
+  .hero-grid{
+    grid-template-columns: 1fr;
+  }
+}
+/* ================= MOBILE ================= */
 @media (max-width: 980px){
   .hero-grid{ grid-template-columns: 1fr; padding: 20px; }
   .row{ grid-template-columns: 1fr; }
