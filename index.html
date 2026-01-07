@@ -22,15 +22,38 @@
 
   <link rel="stylesheet" href="./style.css" />
 
+  <!-- Structured Data: Person + Organization + WebSite (minimal, safe) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "doplnit_PERSON_NAME",
-    "url": "doplnit_SITE_URL",
-    "jobTitle": "doplnit_JOB_TITLE",
-    "areaServed": "CZ",
-    "sameAs": ["doplnit_LINKEDIN_URL"]
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "doplnit_SITE_URL#person",
+        "name": "doplnit_PERSON_NAME",
+        "url": "doplnit_SITE_URL",
+        "jobTitle": "doplnit_JOB_TITLE",
+        "areaServed": "CZ",
+        "sameAs": ["doplnit_LINKEDIN_URL"]
+      },
+      {
+        "@type": "Organization",
+        "@id": "doplnit_SITE_URL#org",
+        "name": "doplnit_BRAND_NAME",
+        "url": "doplnit_SITE_URL",
+        "logo": "doplnit_ORG_LOGO_URL",
+        "areaServed": "CZ",
+        "sameAs": ["doplnit_LINKEDIN_URL"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "doplnit_SITE_URL#website",
+        "url": "doplnit_SITE_URL",
+        "name": "doplnit_BRAND_NAME",
+        "publisher": { "@id": "doplnit_SITE_URL#org" },
+        "inLanguage": "cs-CZ"
+      }
+    ]
   }
   </script>
 </head>
@@ -45,6 +68,8 @@
 
       <nav class="top-actions">
         <a class="btn" href="#pro-investory">Pro investory</a>
+        <a class="btn" href="#duveryhodnost">Důkazy</a>
+        <a class="btn" href="#jak-pracuji">Jak pracuji</a>
         <a class="btn primary" href="#konzultace">Domluvit konzultaci</a>
       </nav>
     </header>
@@ -54,21 +79,36 @@
 
       <div class="hero-grid">
         <div class="hero-copy">
-          <h1>doplnit_HERO_H1</h1>
-          <p class="lead">doplnit_HERO_LEAD</p>
+          <h1>
+            doplnit_HERO_H1
+          </h1>
+
+          <p class="lead">
+            doplnit_HERO_LEAD
+          </p>
 
           <ul class="pill-row">
-            <li class="pill">doplnit_PILL_1</li>
-            <li class="pill">doplnit_PILL_2</li>
-            <li class="pill">doplnit_PILL_3</li>
+            <li class="pill">Proces a kontrola rozhodnutí</li>
+            <li class="pill">Dokumentace a obhajitelnost</li>
+            <li class="pill">Bez tlaku, bez prodejních her</li>
           </ul>
 
           <div class="hero-actions">
-            <a class="btn primary" href="#konzultace">Nezávazná konzultace</a>
+            <a class="btn primary" href="#konzultace">Nezávazná konzultace (15–30 min)</a>
             <a class="btn" href="#jak-pracuji">Jak pracuji</a>
           </div>
 
-          <p class="micro">doplnit_HERO_MICRO</p>
+          <p class="micro">
+            Minimum nákupu od 100&nbsp;000 Kč. ČR. Nejde o investiční doporučení – konzultace trhu s uměním a nákupního procesu.
+          </p>
+
+          <!-- Investor safety: fast orientation -->
+          <div class="card" style="margin-top: 1rem;">
+            <h2 style="margin: 0 0 .25rem 0;">Nejčastější obava investorů</h2>
+            <p style="margin: 0;">
+              „Umění je netransparentní a nechci udělat chybu.“ Přesně proto používám postup, který snižuje dojem a zvyšuje kontrolu: cíl → rozpočet → kontext trhu → výběr → dokumentace.
+            </p>
+          </div>
         </div>
 
         <aside class="card" id="konzultace">
@@ -90,6 +130,29 @@
               </div>
             </div>
 
+            <!-- QUALIFICATION: minimal, but decisive -->
+            <div class="row">
+              <div class="field">
+                <label for="intent">Typ nákupu</label>
+                <select id="intent" name="intent">
+                  <option value="" selected>Vybrat</option>
+                  <option value="b2c">Soukromě</option>
+                  <option value="b2b">Do firmy</option>
+                  <option value="fund">Do struktury / fondu</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="budget">Rozpočet</label>
+                <select id="budget" name="budget">
+                  <option value="" selected>Vybrat</option>
+                  <option value="100-200">100–200 tis. Kč</option>
+                  <option value="200-500">200–500 tis. Kč</option>
+                  <option value="500-1000">0,5–1 mil. Kč</option>
+                  <option value="1m+">1 mil. Kč+</option>
+                </select>
+              </div>
+            </div>
+
             <div class="field">
               <label for="note">Co řešíte</label>
               <textarea id="note" name="note" autocomplete="off" placeholder="doplnit_FORM_NOTE_HINT"></textarea>
@@ -105,6 +168,11 @@
               <a class="fineprint-link" href="doplnit_PRIVACY_URL">Zásady ochrany soukromí</a>.
             </div>
           </form>
+
+          <!-- Secondary direct contact (optional) -->
+          <div class="fineprint" style="margin-top: .75rem;">
+            Preferujete rovnou zavolat? <a class="fineprint-link" href="tel:doplnit_PHONE_E164">doplnit_PHONE_DISPLAY</a>
+          </div>
         </aside>
       </div>
     </section>
@@ -112,13 +180,48 @@
     <main>
       <section class="section" id="pro-investory">
         <h2>Pro investory</h2>
-        <p>doplnit_SECTION_INVESTORS_TEXT</p>
+        <p>
+          Umění je pro investory nezvyklé hlavně kvůli netransparentnosti trhu. Proto ho většina lidí buď odmítne, nebo koupí impulzivně.
+          Já pracuji opačně: nejdřív nastavíme rámec rozhodování a teprve potom vybíráme díla.
+        </p>
+
+        <div class="steps" role="list" style="margin-top: 1rem;">
+          <div class="step" role="listitem">
+            <div class="step-head">
+              <span class="step-num">A</span>
+              <h3>Bezpečný vstup bez „uměleckého tlaku“</h3>
+            </div>
+            <p>
+              Nemusíte rozumět umění. Potřebujete jen vědět, jak se dělá disciplinované rozhodnutí: cíl, rozpočet, kontext, dokumentace.
+            </p>
+          </div>
+
+          <div class="step" role="listitem">
+            <div class="step-head">
+              <span class="step-num">B</span>
+              <h3>Rámec podobný jiným aktivům</h3>
+            </div>
+            <p>
+              Vysvětluji art market jazykem, který znáte z akcií, nemovitostí nebo kovů: riziko, likvidita, časový horizont, srovnatelné obchody.
+            </p>
+          </div>
+
+          <div class="step" role="listitem">
+            <div class="step-head">
+              <span class="step-num">C</span>
+              <h3>B2C i B2B</h3>
+            </div>
+            <p>
+              Nákup řeším pro soukromé sběratele i pro firmy. U firem dává smysl rámec „majetek, instalace, pojištění, obhajitelnost“.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section class="section" id="jak-pracuji">
         <h2>Jak pracuji</h2>
         <p>
-          Pracuji s uměním stejně disciplinovaně, jako investoři přistupují k jiným třídám aktiv.
+          Pracuji s uměním disciplinovaně, podobně jako investoři přistupují k jiným třídám aktiv.
           Proces je nastavený tak, aby minimalizoval dojem a maximalizoval kontrolu rozhodnutí.
         </p>
 
@@ -150,6 +253,7 @@
             </div>
             <p>
               Posuzuji pozici autora, kontinuitu tvorby a srovnatelné prodeje. U Joea Muczky Jr. vycházím z dlouhodobé znalosti jeho práce.
+              Pokud dává smysl, umím postavit i portfolio mimo jednoho autora.
             </p>
           </div>
 
@@ -159,7 +263,7 @@
               <h3>Výběr konkrétních děl</h3>
             </div>
             <p>
-              Navrhuji díla, která dávají smysl k cíli nákupu i rozpočtu. Rozhodování nestavím na osobním vkusu.
+              Navrhuji díla, která dávají smysl k cíli nákupu i rozpočtu. Rozhodování nestavím jen na osobním vkusu.
             </p>
           </div>
 
@@ -180,6 +284,110 @@
             </div>
             <p>
               Po nákupu řešíme instalaci, pojištění a další kroky podle toho, zda jde o soukromý nebo firemní majetek.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bridge CTA -->
+        <div class="card" style="margin-top: 1rem;">
+          <h3 style="margin: 0 0 .25rem 0;">Nejrychlejší cesta</h3>
+          <p style="margin: 0 0 .75rem 0;">
+            Pokud chcete během 15–30 minut pochopit, jestli pro vás umění dává smysl a jak snížit riziko špatného nákupu, domluvíme konzultaci.
+          </p>
+          <a class="btn primary" href="#konzultace">Domluvit konzultaci</a>
+        </div>
+      </section>
+
+      <!-- Trust / Proof section (works even with few references) -->
+      <section class="section" id="duveryhodnost">
+        <h2>Reference & důkazy</h2>
+
+        <div class="steps" role="list">
+          <div class="step" role="listitem">
+            <div class="step-head">
+              <span class="step-num">01</span>
+              <h3>Znalecké posudky (ZP)</h3>
+            </div>
+            <p>
+              Pracuji se znaleckými posudky jako s jedním z pilířů obhajitelnosti. Vysvětlím rozdíl mezi posudkem a tržní cenou a kdy má smysl ZP řešit.
+              <strong>doplnit_ZP_DOKLAD_LINK_OR_POPIS</strong>
+            </p>
+          </div>
+
+          <div class="step" role="listitem">
+            <div class="step-head">
+              <span class="step-num">02</span>
+              <h3>Jméno a kontinuita autora</h3>
+            </div>
+            <p>
+              U Joea Muczky Jr. je výhoda rozpoznatelnosti a dlouhodobé kontinuity tvorby. Umím ukázat, jak se dívat na autora „tržně“ a ne jen esteticky.
+              <strong>doplnit_JOE_BRAND_PROOF</strong>
+            </p>
+          </div>
+
+          <div class="step" role="listitem">
+            <div class="step-head">
+              <span class="step-num">03</span>
+              <h3>Kontext z jiných investic</h3>
+            </div>
+            <p>
+              Umím vysvětlovat art market přes paralely k akciím, nemovitostem a kovům: riziko, likvidita, časový horizont, psychologie trhu.
+              <strong>doplnit_PROOF_BACKGROUND</strong>
+            </p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 1rem;">
+          <h3 style="margin: 0 0 .25rem 0;">Recenze</h3>
+          <p style="margin: 0;">
+            <strong>doplnit_GOOGLE_REVIEWS_TEXT</strong>
+            <a class="btn" style="margin-top: .75rem;" href="doplnit_GOOGLE_REVIEWS_URL" target="_blank" rel="noopener">Zobrazit recenze</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- FAQ for investor anxiety + SEO -->
+      <section class="section" id="faq">
+        <h2>Časté otázky</h2>
+
+        <div class="steps" role="list">
+          <div class="step" role="listitem">
+            <div class="step-head">
+              <span class="step-num">Q1</span>
+              <h3>Musím umění rozumět, abych ho mohl koupit?</h3>
+            </div>
+            <p>
+              Ne. Stačí rozumět vlastnímu cíli a procesu rozhodnutí. Estetika je důležitá, ale nákup nestavím jen na dojmu.
+            </p>
+          </div>
+
+          <div class="step" role="listitem">
+            <div class="step-head">
+              <span class="step-num">Q2</span>
+              <h3>Je umění likvidní?</h3>
+            </div>
+            <p>
+              Likvidita je typicky nižší než u veřejně obchodovaných instrumentů. Proto od začátku nastavujeme realistický horizont a očekávání.
+            </p>
+          </div>
+
+          <div class="step" role="listitem">
+            <div class="step-head">
+              <span class="step-num">Q3</span>
+              <h3>Jak se určuje hodnota obrazu?</h3>
+            </div>
+            <p>
+              Kombinací kontextu autora, srovnatelných prodejů, poptávky a kvality konkrétního díla. ZP může být opora, ale není totéž co tržní cena.
+            </p>
+          </div>
+
+          <div class="step" role="listitem">
+            <div class="step-head">
+              <span class="step-num">Q4</span>
+              <h3>Můžu koupit umění do firmy?</h3>
+            </div>
+            <p>
+              Ano. Důležité je mít jasný rámec: vlastnictví, dokumentaci, instalaci a pojištění. Detaily řešíme podle konkrétní situace.
             </p>
           </div>
         </div>
