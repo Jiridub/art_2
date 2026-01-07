@@ -28,12 +28,10 @@
   /* Background image path */
   --bg-image: url("./images/IMG_2033.jpeg");
 
-  /* “Brick + background” concept (inspired by the minimal design system) */
+  /* extra helpers */
   --stroke: rgba(255,255,255,0.12);
-  --stroke2: rgba(255,255,255,0.18);
   --card: rgba(10,10,12,0.52);
   --card2: rgba(12,12,14,0.72);
-  --card3: rgba(10,10,12,0.42);
   --blur: 12px;
 }
 
@@ -59,7 +57,6 @@ body{
   overflow-x: hidden;
 }
 
-/* Global overlay + vignette + warm accents (keeps readability on top of the photo) */
 body::before{
   content:"";
   position: fixed;
@@ -73,7 +70,6 @@ body::before{
     radial-gradient(900px 650px at 85% 20%, rgba(166,106,44,0.09), transparent 62%);
 }
 
-/* Fine grain (subtle) */
 body::after{
   content:"";
   position: fixed;
@@ -95,7 +91,7 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   margin: 0 auto;
   padding: 22px var(--pad) 60px;
   position: relative;
-  z-index: 1; /* above overlays */
+  z-index: 1;
 }
 
 /* ================= HEADER ================= */
@@ -173,8 +169,8 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   box-shadow: var(--shadow);
   border: 1px solid var(--stroke);
 
-  /* translucent “brick” */
-  background: linear-gradient(180deg, var(--card3) 0%, var(--card2) 100%);
+  /* translucent brick concept */
+  background: linear-gradient(180deg, rgba(10,10,12,0.46) 0%, rgba(12,12,14,0.72) 100%);
   backdrop-filter: blur(var(--blur));
   -webkit-backdrop-filter: blur(var(--blur));
 }
@@ -185,7 +181,7 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   background-image: var(--bg-image);
   background-size: cover;
   background-position: center;
-  opacity: 0.10; /* subtle, global bg already exists */
+  opacity: 0.10;
   filter: saturate(0.98) contrast(1.06);
   transform: scale(1.02);
 }
@@ -259,6 +255,10 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   line-height: 1.55;
   margin-top: 12px;
   max-width: 70ch;
+}
+
+.muted-inline{
+  color: rgba(255,255,255,0.60);
 }
 
 /* ================= FORM ================= */
@@ -363,8 +363,7 @@ main{ margin-top: 18px; }
   border-radius: var(--radius);
   padding: 22px;
 
-  /* translucent “brick” */
-  background: linear-gradient(180deg, var(--card3) 0%, var(--card2) 100%);
+  background: linear-gradient(180deg, rgba(10,10,12,0.42) 0%, rgba(12,12,14,0.66) 100%);
   box-shadow: 0 10px 40px rgba(0,0,0,0.28);
   overflow:hidden;
 
@@ -403,6 +402,37 @@ main{ margin-top: 18px; }
   max-width: 85ch;
 }
 
+/* ====== GRID MINI CARDS (used in step 2 sections) ====== */
+.grid3{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.mini{
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 14px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.mini h3{
+  margin:0 0 6px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.92);
+  letter-spacing: -0.01em;
+}
+
+.mini p{
+  margin:0;
+  color: rgba(255,255,255,0.74);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 /* ================= STEPS ================= */
 
 .steps{
@@ -419,9 +449,6 @@ main{ margin-top: 18px; }
   border-radius: 14px;
   padding: 16px;
   overflow: hidden;
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
 .step::before{
@@ -486,12 +513,65 @@ main{ margin-top: 18px; }
   flex-wrap:wrap;
 }
 
+.footer-links{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.footer-links .sep{
+  color: rgba(215,162,74,0.55);
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: none;
+}
+.modal.is-open{ display: block; }
+
+.modal__backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.62);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.modal__panel{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(520px, 92vw);
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  background: rgba(10,10,12,0.86);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.65);
+  padding: 22px 20px;
+}
+
+.modal__title{
+  margin: 0 0 10px 0;
+  font-size: 22px;
+  font-weight: 560;
+}
+
+.modal__text{
+  margin: 0 0 14px 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
 /* ================= MOBILE ================= */
 
 @media (max-width: 920px){
   .hero-grid{ grid-template-columns: 1fr; padding: 20px; }
   .row{ grid-template-columns: 1fr; }
   .steps{ grid-template-columns: 1fr; }
+  .grid3{ grid-template-columns: 1fr; }
   .topbar{ padding-bottom: 14px; }
   .wrap{ padding-top: 14px; }
   .hero-bg{ opacity: 0.08; }
