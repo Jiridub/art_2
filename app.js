@@ -1,6 +1,8 @@
 // app.js
 (function () {
   const form = document.getElementById("leadForm");
+  if (!form) return;
+
   const submitBtn = document.getElementById("submitBtn");
   const statusEl = document.getElementById("status");
   const ts = document.getElementById("ts");
@@ -13,6 +15,7 @@
   const SECRET = "doplnit_SECRET";
 
   function setStatus(msg, kind) {
+    if (!statusEl) return;
     statusEl.textContent = msg || "";
     statusEl.className = "status" + (kind ? " " + kind : "");
   }
@@ -27,11 +30,22 @@
     return obj;
   }
 
+  function normalizePhone(p) {
+    // Nechávám volné: jen ořez a sjednocení mezer.
+    return String(p || "").trim().replace(/\s+/g, " ");
+  }
+
   function validate(data) {
     if (!data.name || data.name.length < 2) return "Doplňte jméno.";
+    data.phone = normalizePhone(data.phone);
     if (!data.phone || data.phone.length < 6) return "Doplňte telefon.";
-    if (!data.type) return "Vyberte typ zájmu.";
-    if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return "Zkontrolujte e-mail.";
+
+    // NOVĚ: podle indexu je to 'intent'
+    if (!data.intent) return "Vyberte typ nákupu (soukromě / do firmy / do struktury).";
+
+    // Budget nechávám volitelný (někdo nechce sdělit). Pokud chceš povinné, odkomentuj:
+    // if (!data.budget) return "Vyberte rozpočet.";
+
     return "";
   }
 
@@ -49,7 +63,9 @@
     // Prefer sendBeacon
     try {
       if (navigator.sendBeacon) {
-        const blob = new Blob([payload], { type: "application/x-www-form-urlencoded;charset=UTF-8" });
+        const blob = new Blob([payload], {
+          type: "application/x-www-form-urlencoded;charset=UTF-8"
+        });
         const ok = navigator.sendBeacon(url, blob);
         if (ok) return Promise.resolve(true);
       }
@@ -81,7 +97,7 @@
   }
 
   function disableForm(disabled) {
-    submitBtn.disabled = !!disabled;
+    if (submitBtn) submitBtn.disabled = !!disabled;
     const els = form.querySelectorAll("input, textarea, select, button");
     for (let i = 0; i < els.length; i++) els[i].disabled = !!disabled;
   }
@@ -89,7 +105,6 @@
   // init
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
   if (ts) ts.value = nowISO();
-  if (!form) return;
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -100,6 +115,7 @@
     const fd = new FormData(form);
     const data = serializeForm(fd);
 
+    // runtime metadata
     data.url = window.location.href;
     data.referrer = document.referrer || "";
     data.ua = navigator.userAgent || "";
