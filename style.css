@@ -28,7 +28,7 @@
   --focus2: rgba(215,162,74,0.28);
 
   /* Background image path */
-  --bg-image: url(./images/IMG_2033.jpeg);
+  --bg-image: url./images/IMG_2033.jpeg ;
 }
 
 *{ box-sizing:border-box; }
