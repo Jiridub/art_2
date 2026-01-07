@@ -1,8 +1,5 @@
 /* style.css */
-/* Hybrid background:
-   - Artwork only in HERO (brand mood)
-   - Long page uses premium dark gradient + subtle texture
-   - Responsive grids avoid "1/3 right column text stacking" */
+/* Premium hybrid + scrollable artwork layer across "bricks" + robust wrapping fixes */
 
 :root{
   --bg0: #070607;
@@ -28,14 +25,15 @@
 
   --focus: rgba(215,162,74,0.18);
 
-  /* Artwork image path (used in HERO only) */
   --bg-image: url("./images/IMG_2033.jpeg");
 
-  /* helpers */
   --stroke: rgba(255,255,255,0.12);
   --card: rgba(10,10,12,0.52);
   --card2: rgba(12,12,14,0.72);
   --blur: 12px;
+
+  /* parallax */
+  --art-y: 0px;
 }
 
 *{ box-sizing:border-box; }
@@ -46,12 +44,11 @@ body{
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
   color: var(--text);
 
-  /* HYBRID: no full-page artwork here */
+  /* HYBRID base (no huge wallpaper dependency) */
   background:
     radial-gradient(1200px 800px at 50% 10%, rgba(215,162,74,0.10), transparent 60%),
     radial-gradient(900px 700px at 85% 20%, rgba(166,106,44,0.08), transparent 62%),
     linear-gradient(180deg, #070607 0%, #0b0908 35%, #060607 100%);
-  background-attachment: scroll;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -60,7 +57,7 @@ body{
   overflow-x: hidden;
 }
 
-/* Premium overlays (keep) */
+/* Global texture / depth */
 body::before{
   content:"";
   position: fixed;
@@ -87,7 +84,23 @@ body::after{
   mix-blend-mode: overlay;
 }
 
-/* Safe wrapping for long strings (URLs, phone etc.), but not "break every word" */
+/* === THE KEY: one artwork layer for the entire page (moves on scroll) === */
+.art-bg{
+  position: fixed;
+  inset: -18vh -10vw -18vh -10vw; /* extra bleed so no edges appear when moving */
+  z-index: 0;
+  pointer-events: none;
+
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.16;
+
+  transform: translate3d(0, var(--art-y), 0) scale(1.04);
+  filter: saturate(1.02) contrast(1.06);
+}
+
+/* readable text wrapping: not aggressive */
 p, li, .micro, .lead, .status, .fineprint{
   overflow-wrap: break-word;
   word-break: normal;
@@ -102,7 +115,7 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   margin: 0 auto;
   padding: 22px var(--pad) 60px;
   position: relative;
-  z-index: 1;
+  z-index: 1; /* above art-bg + overlays */
 }
 
 /* ================= HEADER ================= */
@@ -115,21 +128,14 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   padding: 10px 0 22px;
 }
 
-.brand{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-}
+.brand{ display:flex; flex-direction:column; gap:2px; }
 .brand strong{
   font-size: 14px;
   letter-spacing: 0.10em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.88);
 }
-.brand span{
-  font-size: 12px;
-  color: var(--muted);
-}
+.brand span{ font-size: 12px; color: var(--muted); }
 
 .top-actions{
   display:flex;
@@ -159,7 +165,6 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   -webkit-tap-highlight-color: transparent;
   white-space: nowrap;
 }
-
 .btn:hover{
   background: rgba(255,255,255,0.06);
   border-color: rgba(215,162,74,0.32);
@@ -183,19 +188,20 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   box-shadow: var(--shadow);
   border: 1px solid var(--stroke);
 
-  background: linear-gradient(180deg, rgba(10,10,12,0.46) 0%, rgba(12,12,14,0.72) 100%);
+  /* bricks are translucent so the art-bg shines through */
+  background: linear-gradient(180deg, rgba(10,10,12,0.44) 0%, rgba(12,12,14,0.70) 100%);
   backdrop-filter: blur(var(--blur));
   -webkit-backdrop-filter: blur(var(--blur));
 }
 
-/* Artwork lives here (not on body) */
+/* Keep hero-bg, but now it is just a subtle local boost, not the main wallpaper */
 .hero-bg{
   position:absolute;
   inset:0;
   background-image: var(--bg-image);
   background-size: cover;
   background-position: center;
-  opacity: 0.16;
+  opacity: 0.08;
   filter: saturate(1.02) contrast(1.06);
   transform: scale(1.02);
 }
@@ -211,9 +217,6 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   pointer-events:none;
 }
 
-/* Fix mid-width collapse:
-   - force min width for form card
-   - prevent narrow right column that causes "words stacked" */
 .hero-grid{
   position:relative;
   display:grid;
@@ -277,14 +280,10 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   max-width: 74ch;
 }
 
-.muted-inline{
-  color: rgba(255,255,255,0.60);
-}
-
-/* ================= FORM ================= */
+/* ================= FORM / CARDS ================= */
 
 .card{
-  background: linear-gradient(180deg, var(--card) 0%, var(--card2) 100%);
+  background: linear-gradient(180deg, rgba(10,10,12,0.46) 0%, rgba(12,12,14,0.74) 100%);
   border: 1px solid var(--stroke);
   border-radius: var(--radius2);
   padding: 16px;
@@ -381,10 +380,6 @@ input:focus, textarea:focus, select:focus{
   font-size: 11.5px;
   line-height: 1.55;
 }
-.fineprint-link{
-  text-decoration: underline;
-  text-decoration-color: rgba(215,162,74,0.55);
-}
 
 /* ================= SECTIONS ================= */
 
@@ -397,7 +392,7 @@ main{ margin-top: 18px; }
   border-radius: var(--radius);
   padding: 22px;
 
-  background: linear-gradient(180deg, rgba(10,10,12,0.42) 0%, rgba(12,12,14,0.66) 100%);
+  background: linear-gradient(180deg, rgba(10,10,12,0.40) 0%, rgba(12,12,14,0.64) 100%);
   box-shadow: 0 10px 40px rgba(0,0,0,0.28);
   overflow:hidden;
 
@@ -417,10 +412,7 @@ main{ margin-top: 18px; }
   opacity: 0.85;
 }
 
-.section > *{
-  position: relative;
-  z-index: 1;
-}
+.section > *{ position: relative; z-index: 1; }
 
 .section h2{
   margin:0 0 10px;
@@ -437,19 +429,19 @@ main{ margin-top: 18px; }
 }
 
 /* ================= STEPS ================= */
-/* This is the real fix for "text stacked in right 1/3":
-   - no fixed 3 columns
-   - cards keep a minimum width, grid decides how many fit */
+/* Hard fix:
+   - cards never get too narrow
+   - step header flex can't squeeze h3 into vertical "letter stack" */
 .steps{
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 14px;
   margin-top: 18px;
 }
 
 .step{
   position: relative;
-  background: linear-gradient(180deg, rgba(0,0,0,0.32) 0%, rgba(0,0,0,0.22) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.20) 100%);
   border: 1px solid rgba(255,255,255,0.10);
   border-radius: 14px;
   padding: 16px;
@@ -460,9 +452,7 @@ main{ margin-top: 18px; }
 .step::before{
   content:"";
   position:absolute;
-  left: 0;
-  right: 0;
-  top: 0;
+  left: 0; right: 0; top: 0;
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, rgba(215,162,74,0.55) 50%, transparent 100%);
   opacity: 0.75;
@@ -498,6 +488,9 @@ main{ margin-top: 18px; }
   font-weight: 650;
   color: rgba(255,255,255,0.92);
   letter-spacing: -0.01em;
+
+  /* critical: don't allow weird squeeze */
+  flex: 1 1 auto;
   min-width: 0;
 }
 
@@ -522,70 +515,13 @@ main{ margin-top: 18px; }
   flex-wrap:wrap;
 }
 
-.footer-links{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-.footer-links .sep{
-  color: rgba(215,162,74,0.55);
-}
-
-/* ================= MODAL ================= */
-
-.modal{
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  display: none;
-}
-.modal.is-open{ display: block; }
-
-.modal__backdrop{
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.62);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-
-.modal__panel{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: min(520px, 92vw);
-  transform: translate(-50%, -50%);
-  border-radius: 20px;
-  background: rgba(10,10,12,0.86);
-  border: 1px solid rgba(255,255,255,0.14);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.65);
-  padding: 22px 20px;
-}
-
-.modal__title{
-  margin: 0 0 10px 0;
-  font-size: 22px;
-  font-weight: 560;
-}
-
-.modal__text{
-  margin: 0 0 14px 0;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-/* ================= MOBILE / BREAKPOINTS ================= */
+/* ================= MOBILE ================= */
 
 @media (max-width: 980px){
-  /* Prevent hero form becoming narrow column at this breakpoint */
-  .hero-grid{
-    grid-template-columns: 1fr;
-    padding: 20px;
-  }
+  .hero-grid{ grid-template-columns: 1fr; padding: 20px; }
   .row{ grid-template-columns: 1fr; }
-  .topbar{ padding-bottom: 14px; }
-  .wrap{ padding-top: 14px; }
-  .hero-bg{ opacity: 0.12; }
+  .hero-bg{ opacity: 0.08; }
+  .steps{ grid-template-columns: 1fr; } /* keep it clean on small widths */
 }
 
 @media (max-width: 420px){
@@ -597,4 +533,5 @@ main{ margin-top: 18px; }
 
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; scroll-behavior:auto !important; }
+  .art-bg{ transform: none !important; }
 }
