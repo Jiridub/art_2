@@ -9,7 +9,7 @@
   const yearEl = document.getElementById("y");
 
   // Endpoint Apps Script Web App
-  const APPS_SCRIPT_URL = "doplnit_APPS_SCRIPT_WEBAPP_URL";
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwXCCwAJW6e_ZuYMbE_FIq2wMYBDKuuPtlNTC-2iSfhzobi28794HEJQcl9j6bBJI3G/exec";
 
   // Sdílené tajemství (doporučené)
   const SECRET = "JDM_secret_token";
