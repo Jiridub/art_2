@@ -546,3 +546,16 @@ p {
   word-break: normal;
   hyphens: none;
 }
+/* Links styled as primary accent (like buttons), dotted underline */
+a{
+  color: var(--amber);
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: rgba(215,162,74,0.65);
+  text-underline-offset: 3px;
+}
+
+a:hover{
+  color: #f0c26b;
+  text-decoration-color: rgba(215,162,74,0.95);
+}
