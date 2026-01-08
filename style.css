@@ -455,7 +455,7 @@ main{ margin-top: 18px; }
   color: var(--muted);
   line-height: 1.66;
   font-size: 14px;
-  max-width: 85ch;
+  max-width: 100%;
 }
 
 /* ================= STEPS ================= */
