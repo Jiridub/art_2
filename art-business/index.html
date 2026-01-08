@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Art &amp; Business</title>
+
+  <!-- New, independent styling for this landing -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <!-- Background layers -->
+  <div class="bg" aria-hidden="true">
+    <div class="bg__image" id="bgImage"></div>
+    <div class="bg__overlay"></div>
+    <div class="bg__grain"></div>
+    <div class="bg__vignette"></div>
+  </div>
+
+  <main class="shell">
+    <section class="card" aria-label="RSVP">
+      <header class="header">
+        <!-- Event date token: edit this value for each new event -->
+        <p class="eyebrow">
+          <span class="eyebrow__label">Event</span>
+          <span class="eyebrow__dot">•</span>
+          <span class="eyebrow__date" id="eventDateText"></span>
+        </p>
+
+        <h1 class="title">
+          Art &amp; Business <span class="title__date">( <span id="eventDateTitle"></span> )</span>
+        </h1>
+
+        <!-- Placeholders you will edit manually -->
+        <div class="meta">
+          <div class="meta__item">
+            <span class="meta__k">Datum</span>
+            <span class="meta__v" id="eventDateMeta">20/01</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__k">Čas</span>
+            <span class="meta__v" id="eventTime">18:00</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__k">Adresa</span>
+            <span class="meta__v" id="eventAddress">Art-n-Coffee, Na Příkope 860, Nové město</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- autocomplete="on" + správné hinty pro iOS/Android/PC -->
+      <form id="rsvpForm" class="form" novalidate action="#" method="post" autocomplete="on">
+        <!-- Hidden event identifier you will change in HTML -->
+        <input type="hidden" id="eventCode" name="eventCode" value="AB_20-01" />
+
+        <div class="choices">
+          <label class="check">
+            <input type="checkbox" name="reserveSeat" id="reserveSeat" />
+            <span class="check__box" aria-hidden="true"></span>
+            <span class="check__text">Zarezervovat místo</span>
+          </label>
+
+          <label class="check">
+            <input type="checkbox" name="holdPlusOne" id="holdPlusOne" />
+            <span class="check__box" aria-hidden="true"></span>
+            <span class="check__text">Přejete si +1 místo pro hosta?</span>
+          </label>
+        </div>
+
+        <!-- Hint pro povinnou volbu checkboxů -->
+        <p class="hint" id="choiceHint" aria-live="polite"></p>
+
+        <div class="grid">
+          <div class="field">
+            <label for="firstName">Jméno</label>
+            <input
+              id="firstName"
+              name="given-name"
+              type="text"
+              autocomplete="given-name"
+              autocapitalize="words"
+              autocorrect="off"
+              spellcheck="false"
+              required
+            />
+            <p class="hint" id="firstNameHint" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="lastName">Příjmení</label>
+            <input
+              id="lastName"
+              name="family-name"
+              type="text"
+              autocomplete="family-name"
+              autocapitalize="words"
+              autocorrect="off"
+              spellcheck="false"
+              required
+            />
+            <p class="hint" id="lastNameHint" aria-live="polite"></p>
+          </div>
+
+          <div class="field field--full">
+            <label for="email">Email (pro přidání do kalendáře)</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              inputmode="email"
+              autocapitalize="none"
+              autocorrect="off"
+              spellcheck="false"
+              required
+            />
+            <p class="hint" id="emailHint" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <!-- Honeypot (anti-spam), skryté pole – lidi neuvidí, boti často vyplní -->
+        <input
+          type="text"
+          name="company"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+          style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;"
+        />
+
+        <div class="gdpr">
+          <label class="check check--gdpr">
+            <input type="checkbox" name="gdpr" id="gdpr" required />
+            <span class="check__box" aria-hidden="true"></span>
+            <span class="check__text">
+              Souhlasím se zpracováním osobních údajů dle
+              <a href="/GDPR" target="_blank" rel="noopener noreferrer">GDPR</a>.
+            </span>
+          </label>
+          <p class="hint" id="gdprHint" aria-live="polite"></p>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn" id="submitBtn">
+            Odeslat
+          </button>
+          <p class="small">
+            Odesláním potvrzujete registraci účasti.
+          </p>
+        </div>
+
+        <!-- Prepared hooks (no measurement ID yet) -->
+        <input type="hidden" id="analyticsReady" value="1" />
+      </form>
+
+      <footer class="footer">
+        <span class="footer__line"></span>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Popup -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h2 class="modal__title" id="modalTitle">Rezervace přijata</h2>
+      <p class="modal__text">
+        Děkuji. Jste evidovaný/á na seznamu hostů.
+      </p>
+      <button class="btn btn--ghost" type="button" data-close>Zavřít</button>
+    </div>
+  </div>
+
+  <script>
+    window.__AB_BG__ = "/images/IMG_2033.jpeg";
+  </script>
+  <script src="./app.js"></script>
+</body>
+</html>
