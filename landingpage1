@@ -1,0 +1,273 @@
+<head>
+  <!-- ... GTM, Clarity, JSON-LD, meta ... -->
+
+  <link rel="canonical" href="https://www.jiridubskymuller.eu/landingpage1" />
+
+  <title>Jiří Dubský Müller</title>
+  <meta name="description" content="Překládám alternativní svět umění do jazyka investorů a firem" />
+
+  <!-- PŮVODNÍ main.css odpojíme a připojíme nový CSS soubor -->
+  <!-- <link rel="stylesheet" href="assets/css/main.css" /> -->
+  <link rel="stylesheet" href="assets/css/landing.css" />
+  <noscript><link rel="stylesheet" href="assets/css/landing.css" /></noscript>
+  <!-- <FONT/> -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uurpcyqm08");
+</script>
+</head>
+
+<body>
+
+  <!-- Google Tag Manager (noscript) – zkopíruj stejně jako na indexu -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KP28MC4C"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- Hlavní wrapper -->
+  <div class="page-wrapper">
+
+    <!-- Horní “bar” s logem/jménem -->
+    <header class="lp-header">
+      <div class="lp-logo">
+  <img src="images/Favibig.png" alt="Logo" />
+</div>
+      <div class="lp-header-text">
+        <span>Jiří Dubský Müller</span>
+        <span>Art manažer & dealer</span>
+      </div>
+    </header>
+
+    <!-- HERO sekce -->
+    <section class="lp-hero">
+  <div class="lp-hero-text">
+    <h1>Nezávazný hovor o umění</h1>
+    <p>
+      Vysvětlím vám, jak umění funguje z pohledu investora: diverzifikace, likvidita, danění, rizika, trh a reálné možnosti.
+    </p>
+    <ul class="lp-hero-bullets">
+      <li>20 minut v Praze / on-line / telefonicky</li>
+      <li>Bez závazku, na konci se jednoduše rozhodnete, jestli má smysl pokračovat fyzicky do ateliéru</li>
+    </ul>
+    <a href="#kontakt" class="lp-hero-cta" onclick="trackCTA('lp1','hero_hovor')">
+      Domluvit hovor
+    </a>
+    <p class="lp-hero-note">
+      <span>Preferujete nezávaznou osobní schůzku v Praze? Napište mi to do poznámky ve formuláři.</span>
+    </p>
+  </div>
+</section>
+
+    <!-- Sekce: Pro koho to je -->
+    <section class="lp-section lp-section-alt">
+      <div class="lp-section-inner">
+        <h2>Pro koho má takový hovor smysl</h2>
+        <div class="lp-columns">
+          <div class="lp-col">
+            <h3>Investoři, podnikatelé, majitelé firem</h3>
+            <p>
+              Máte za sebou budování firmy, investice do nemovitostí nebo cenných papírů ale umění je pro vás zatím spíš “hezký obraz na zeď” než strategická součást majetku.
+            </p>
+          </div>
+          <div class="lp-col">
+            <h3>Ti, co nechtějí „umělecký jargon“</h3>
+            <p>
+              Jak se umění kupuje, prodává, zdaňuje a jaká jsou reálná čísla. Mluvím jazykem investorů, ne galeristů.
+            </p>
+          </div>
+          <div class="lp-col">
+            <h3>Lidé, kteří chtějí rozhodovat na základě faktů</h3>
+            <p>
+              Nechcete nic kupovat pod emocemi ale nejdřív popochopit, 
+              kde v umění leží hodnota a kde naopak jen marketing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sekce: Co na hovoru probereme -->
+    <section class="lp-section">
+      <div class="lp-section-inner">
+        <h2>Co během 20 minut stihneme</h2>
+        <div class="lp-grid-2">
+          <div>
+            <ul class="lp-list">
+              <li>Jak umění zapadá nebo nezapadá do vašeho stávajícího majetku</li>
+              <li>Rozdíl mezi dekorací a dílem s reálným tržním potenciálem</li>
+              <li>Základní rámec likvidity a dlouhodobého vývoje hodnot</li>
+              <li>Jak fungují nákupy přímo od autora vs. galerie a aukce</li>
+            </ul>
+          </div>
+          <div>
+            <ul class="lp-list">
+              <li>Co dává (a nedává) smysl v kontextu vašeho cashflow</li>
+              <li>Kdy je lepší umění vůbec neřešit</li>
+              <li>Jak může vypadat další krok, pokud vám to celé dává hlavu a patu</li>
+            </ul>
+          </div>
+        </div>
+        <p class="lp-note">
+          *Hovor není prodejní prezentace. Je to filtr: buď zjistíme, že má smysl pokračovat, nebo si jen 
+          odnesete větší přehled.
+        </p>
+      </div>
+    </section>
+
+    <!-- Sekce: Kdo jsem (zhuštěná verze) -->
+<section class="lp-section lp-section-alt">
+  <div class="lp-section-inner lp-about">
+    <div class="lp-about-inner">
+
+      <div class="lp-about-text">
+        <h2>Kdo s vámi bude mluvit</h2>
+        <p>
+          Jsem art manažer a dealer vyškolený mezinárodně úspěšným uměleckým malířem a designérem 
+          <a href="http://jmjart.eu" target="_blank" rel="noopener noreferrer">Joe Muczka Jr.</a> se kterým aktivně spolupracuji.
+        </p>
+        <p>
+          Působím dlouhodobě v investičním prostředí (s licenci investičního zprostředkovatele) a svět umění překládám do jazyka 
+          investorů, podnikatelů a firem. Neřeším „pocity u obrazu“, ale hodnotu, souvislosti, data a reálné scénáře.
+        </p>
+        <p>
+          Pokud od umění očekáváte víc než jen dekoraci, pravděpodobně si budeme rozumět.
+        </p>
+      </div>
+
+      <div class="lp-about-photo">
+        <img src="images/IMG_1036.jpeg" alt="Jiří Dubský Müller" />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+   <!-- KONTAKT – hlavní CTA -->
+<section class="lp-section lp-contact" id="kontakt">
+  <div class="lp-section-inner">
+    <h2>Domluvme si hovor</h2>
+    <p class="lp-contact-intro">
+      Vyplňte krátký formulář a domluvme se na hovoru/sektání nebo použijte roh vpravo dole pro zabookování do kalendáře.
+    </p>
+
+    <form method="POST" action="https://formspree.io/f/manleggp" class="lp-form">
+      <div class="lp-form-row">
+        <div class="lp-field">
+          <label for="name">Vaše jméno*</label>
+          <input type="text" name="name" id="name" required />
+        </div>
+        <div class="lp-field">
+          <label for="email">Váš e-mail*</label>
+          <input type="email" name="email" id="email" required />
+        </div>
+      </div>
+
+      <div class="lp-form-row">
+        <div class="lp-field">
+          <label for="phone">Telefon*</label>
+          <input type="text" name="phone" id="phone" />
+        </div>
+      </div>
+
+      <div class="lp-field">
+        <label for="message">Zpráva</label>
+        <textarea name="message" id="message" rows="6" required>
+Rád bych si domluvil/a 20ti minutové nezávazné setkání.
+              
+Preferovaná forma (telefonní hovor / online (google meet) / fyzicky v Praze): 
+
+Preferované dny a čas (více možností prosím):
+          
+        </textarea>
+      </div>
+
+      <!-- označení varianty landing page -->
+      <input type="hidden" name="landing" value="lp1_20min_hovor" />
+
+      <button type="submit" class="lp-hero-cta" onclick="trackCTA('lp1','form_submit')">
+        Odeslat zprávu
+      </button>
+    </form>
+
+    <div class="lp-contact-footer">
+      <div class="lp-contact-gdpr">
+        <h3>Jak pracuji s vašimi údaji</h3>
+        <p>
+          Vaše údaje používám pouze pro zpětný kontakt a domluvu hovoru. 
+          Nepředávám je třetím stranám pro jejich marketing.
+        </p>
+        <p>
+          Detailní informace najdete v&nbsp;
+          <a href="/GDPR" target="_blank" rel="noopener noreferrer">
+            Zásadách ochrany osobních údajů (GDPR)
+          </a>.
+        </p>
+      </div>
+      <div class="lp-contact-direct">
+        <h3>Přímý kontakt</h3>
+        <p>
+          Jiří Dubský Müller<br>
+          Tel.: 792 232 908<br>
+          E-mail: <a href="mailto:art@jiridubsky.cz">art@jiridubsky.cz</a><br>
+            IČO: 11885904<br>
+            Sídlo: Myjavská 625/4, Čakovice, 196 00 Praha 9<br>
+            Zapsán v živnostenském rejstříku od 27. 09. 2021:
+          <a href="https://ares.gov.cz/ekonomicke-subjekty/res/11885904"
+             target="_blank"
+             rel="noopener noreferrer">
+            ARES
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Patička -->
+    <footer class="lp-footer">
+      <p>&copy; Jiří Dubský Müller.</p>
+    </footer>
+
+  </div>
+
+  <!-- Art Curator Chat Widget – zkopíruj přesně z indexu -->
+  <!-- Cookie banner + JS – zkopíruj přesně z indexu -->
+  <!-- trackCTA funkce -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var btn = document.getElementById('calendly-btn');
+    if (!btn) return;
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      if (window.Calendly && typeof Calendly.initPopupWidget === 'function') {
+        Calendly.initPopupWidget({
+          url: 'https://calendly.com/art-jiridubsky/20min?hide_event_type_details=1&hide_gdpr_banner=1'
+        });
+      } else {
+        console.log('Calendly objekt není k dispozici:', window.Calendly);
+        alert('Online rezervační okno se nepodařilo načíst. Zkuste prosím obnovit stránku nebo použijte přímý kontakt.');
+      }
+    });
+  });
+</script>
+  <script>
+    function trackCTA(variant, position) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'cta_click',
+        cta_variant: variant,
+        cta_position: position
+      });
+    }
+  </script>
+<!-- Calendly link widget begin -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/art-jiridubsky/20min', text: 'Schedule time with me', color: '#0069ff', textColor: '#ffffff', branding: true }); }</script>
+<!-- Calendly badge widget end -->
+</body>
