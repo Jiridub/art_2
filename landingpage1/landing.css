@@ -1,0 +1,525 @@
+/* ------------------------------------------------------------------
+   Reset / base
+------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, #151a30 0, #050812 55%, #020309 100%);
+  color: #f5f5f5;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.03em;
+}
+
+/* Wrapper */
+.page-wrapper {
+  min-height: 100vh;
+}
+
+/* ------------------------------------------------------------------
+   Header
+------------------------------------------------------------------ */
+.lp-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  padding: 1rem 6vw;
+  backdrop-filter: blur(16px);
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 8, 18, 0.9),
+    rgba(5, 8, 18, 0.8),
+    transparent
+  );
+  border-bottom: 1px solid rgba(212, 178, 124, 0.18);
+}
+
+.lp-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 178, 124, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-right: 0.9rem;
+}
+
+.lp-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: scale(1.5) translateY(1px);
+}
+
+.lp-header-text span:first-child {
+  display: block;
+  font-weight: 600;
+  font-size: 0.98rem;
+}
+
+.lp-header-text span:last-child {
+  display: block;
+  font-size: 0.82rem;
+  opacity: 0.7;
+}
+
+/* ------------------------------------------------------------------
+   HERO
+------------------------------------------------------------------ */
+.lp-hero {
+  padding: 4.5rem 6vw 1.8rem;
+}
+
+.lp-hero-text {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.2rem 2.4rem 2.5rem;
+  border-radius: 24px;
+  background: radial-gradient(circle at top left, #171a2a 0, #101323 55%, #0c1020 100%);
+  box-shadow:
+    0 22px 45px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(255, 255, 255, 0.03);
+
+  /* NOVÉ */
+  text-align: center;
+}
+
+.lp-hero-bullets {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.lp-hero-bullets li {
+  text-align: center;
+  padding-left: 0;
+}
+
+.lp-hero-bullets li::before {
+  display: none; /* aby nevisela tečka nalevo mimo osu */
+}
+
+.lp-hero-text h1 {
+  font-size: clamp(2.1rem, 3vw, 2.7rem);
+  margin: 0 0 1rem;
+}
+
+.lp-hero-text p {
+  margin: 0 0 1.2rem;
+  line-height: 1.7;
+  color: rgba(245, 245, 245, 0.9);
+}
+
+.lp-hero-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.6rem;
+}
+
+.lp-hero-bullets li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.lp-hero-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0.25rem;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #d4b27c;
+}
+
+.lp-hero-note {
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  color: rgba(245, 245, 245, 0.78);
+}
+
+/* CTA button (primární) */
+.lp-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.9rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #d4b27c, #b78b4f);
+  color: #050609;
+  font-weight: 600;
+  font-size: 0.98rem;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.65);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+}
+
+.lp-hero-cta:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.8);
+}
+
+.lp-hero-cta:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* ------------------------------------------------------------------
+   Sekce
+------------------------------------------------------------------ */
+.lp-section {
+  padding: 1.6rem 6vw;
+}
+
+.lp-section-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 2.1rem 2.3rem 2.4rem;
+  border-radius: 22px;
+  background: rgba(11, 14, 28, 0.9);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.lp-section-alt .lp-section-inner {
+  background: rgba(14, 18, 34, 0.95);
+}
+
+.lp-section h2 {
+  margin-top: 0;
+  margin-bottom: 1.3rem;
+  font-size: 1.6rem;
+}
+
+.lp-section p {
+  color: rgba(245, 245, 245, 0.86);
+}
+
+/* Pro koho */
+.lp-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.7rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.lp-col h3 {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+}
+
+/* Co na hovoru probereme */
+.lp-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.lp-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.lp-list li::before {
+  content: "–";
+  margin-right: 0.4rem;
+  opacity: 0.75;
+}
+
+.lp-note {
+  margin-top: 1.4rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* ------------------------------------------------------------------
+   Kontakt / form
+------------------------------------------------------------------ */
+.lp-contact .lp-section-inner {
+  background: radial-gradient(circle at top left, #171a2a 0, #101323 45%, #0b0f1f 100%);
+  border: 1px solid rgba(212, 178, 124, 0.18);
+}
+
+/* přidat: */
+.lp-contact h2,
+.lp-contact-intro {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lp-contact-intro {
+  margin: 0 auto 1.6rem;
+  max-width: 34rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.lp-form {
+  max-width: 640px;
+  margin: 0 auto 2rem;
+}
+
+.lp-form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.3rem;
+  margin-bottom: 1.1rem;
+}
+
+.lp-field label {
+  display: block;
+  font-size: 0.86rem;
+  margin-bottom: 0.35rem;
+  color: rgba(245, 245, 245, 0.8);
+}
+
+.lp-field input,
+.lp-field textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(5, 7, 16, 0.95);
+  color: #f5f5f5;
+  padding: 0.7rem 0.9rem;
+  font: inherit;
+  resize: vertical;
+}
+
+.lp-field input:focus,
+.lp-field textarea:focus {
+  outline: none;
+  border-color: rgba(212, 178, 124, 0.7);
+  box-shadow: 0 0 0 1px rgba(212, 178, 124, 0.35);
+}
+
+.lp-contact-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 2rem;
+  font-size: 0.86rem;
+  line-height: 1.7;
+  margin: 2rem auto 0;      /* !!! vystředění celého bloku */
+  max-width: 820px;         /* aby to nebylo roztažené */
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(245, 245, 245, 0.12);
+  color: rgba(245, 245, 245, 0.78);
+}
+
+/* jemné odlišení levého GDPR bloku */
+.lp-contact-gdpr {
+  opacity: 0.9;
+}
+
+.lp-contact-gdpr h3,
+.lp-contact-direct h3 {
+  font-size: 0.95rem;
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+}
+
+.lp-contact-gdpr p,
+.lp-contact-direct p {
+  margin: 0.2rem 0;
+}
+
+/* ------------------------------------------------------------------
+   Footer
+------------------------------------------------------------------ */
+.lp-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.5rem 6vw 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.86rem;
+}
+
+.lp-footer a {
+  color: #f5f5f5;
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------------------
+   Responsivita
+------------------------------------------------------------------ */
+
+/* Tablet + mobil */
+@media (max-width: 900px) {
+  body {
+    font-size: 17px;
+    line-height: 1.85;
+  }
+
+  .lp-header {
+    padding: 1rem 5vw;
+  }
+
+  .lp-hero {
+    padding: 3.0rem 5vw 1.3rem;
+  }
+
+  .lp-hero-text {
+    padding: 1.9rem 1.7rem 2.1rem;
+  }
+
+  .lp-section {
+    padding: 1.4rem 5vw;
+  }
+
+  .lp-section-inner {
+    padding: 1.9rem 1.8rem 2rem;
+  }
+
+  .lp-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .lp-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .lp-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .lp-contact-footer {
+    grid-template-columns: 1fr;
+  }
+
+  .lp-hero-cta {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .lp-footer {
+    padding: 1.6rem 5vw 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* Telefony */
+@media (max-width: 600px) {
+  body {
+    font-size: 18px;
+    line-height: 1.9;
+  }
+
+  .lp-hero {
+    padding-top: 2.8rem;
+  }
+
+  .lp-hero-text h1 {
+    font-size: 1.95rem;
+  }
+
+  .lp-hero-text p {
+    font-size: 1.02rem;
+  }
+
+  .lp-hero-bullets {
+    font-size: 1rem;
+  }
+
+  .lp-hero-cta {
+    font-size: 1.02rem;
+    padding: 1.05rem 1.3rem;
+  }
+
+  .lp-section-inner {
+    padding: 1.4rem 1.4rem 1.6rem;
+  }
+}
+/* Základní styl odkazů – bílé s tečkovaným podtržením */
+a {
+  color: #f5f5f5;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(245, 245, 245, 0.6);
+}
+
+a:hover {
+  border-bottom-color: #d4b27c;        /* jemný zlatavý efekt při hoveru */
+}
+
+/* Odkazy v textu, které už jsou uvnitř tlačítek nebo speciálních prvků,
+   si border řeší samy */
+
+/* Kdo s vámi bude mluvit – text + fotka vpravo */
+.lp-about-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: center;           /* vertikální centrování v rámci cihly */
+}
+
+.lp-about-text p {
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+.lp-about-photo {
+  display: flex;
+  align-items: center;           /* vertikálně uprostřed */
+  justify-content: flex-end;     /* fotka k pravému okraji cihly */
+}
+
+.lp-about-photo img {
+  width: 100%;
+  max-width: 260px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+}
+@media (max-width: 900px) {
+  .lp-about-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .lp-about-photo {
+    justify-content: center;
+    margin-top: 1.4rem;
+  }
+
+  .lp-about-photo img {
+    max-width: 220px;
+  }
+}
+.lp-contact .lp-section-inner {
+  width: fit-content;
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* CTA tlačítko ve formuláři na střed */
+.lp-contact .lp-hero-cta {
+  display: block;
+  margin: 0.6rem auto 0;   /* auto = vystředění */
+}
