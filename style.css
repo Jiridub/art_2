@@ -1,5 +1,5 @@
 /* style.css */
-/* Premium hybrid + scrollable artwork layer across "bricks" + robust wrapping fixes */
+/* Premium hybrid + scrollable artwork layer across "bricks" + clean typography + visible links */
 
 :root{
   --bg0: #070607;
@@ -100,15 +100,49 @@ body::after{
   filter: saturate(1.02) contrast(1.06);
 }
 
-/* readable text wrapping: not aggressive */
-p, li, .micro, .lead, .status, .fineprint{
-  overflow-wrap: break-word;
+/* ================= TYPOGRAPHY (WRAPPING FIX) ================= */
+/* Paragraphs in Czech: do NOT auto-break words or auto-hyphenate */
+p{
+  white-space: normal;
+  overflow-wrap: normal;
   word-break: normal;
-  hyphens: auto;
+  hyphens: none;
 }
 
-a{ color: inherit; text-decoration: none; }
-a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55); }
+/* Lists: same idea */
+li{
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+/* Only break things that can be unbreakable (URLs / long tokens) */
+a, .status, .fineprint, code{
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: none;
+}
+
+/* Make section intros prettier (optional but helps a lot visually) */
+.section p{
+  text-wrap: pretty;
+}
+.section h2{
+  text-wrap: balance;
+}
+
+/* ================= LINKS (VISIBLE, ACCENT, DOTTED) ================= */
+a{
+  color: var(--amber);
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: rgba(215,162,74,0.65);
+  text-underline-offset: 3px;
+}
+a:hover{
+  color: #f0c26b;
+  text-decoration-color: rgba(215,162,74,0.95);
+}
 
 .wrap{
   max-width: var(--max);
@@ -164,11 +198,13 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   user-select:none;
   -webkit-tap-highlight-color: transparent;
   white-space: nowrap;
+  text-decoration: none; /* avoid dotted underline on buttons */
 }
 .btn:hover{
   background: rgba(255,255,255,0.06);
   border-color: rgba(215,162,74,0.32);
   box-shadow: 0 0 0 4px rgba(215,162,74,0.06);
+  text-decoration: none;
 }
 .btn:active{ transform: translateY(1px); }
 
@@ -177,6 +213,7 @@ a:hover{ text-decoration: underline; text-decoration-color: rgba(215,162,74,0.55
   color: #0b0c10;
   border-color: transparent;
   font-weight: 700;
+  text-decoration: none;
 }
 
 /* ================= HERO ================= */
@@ -515,13 +552,13 @@ main{ margin-top: 18px; }
   flex-wrap:wrap;
 }
 
-
 /* FIX: zabrání úzké pravé třetině, kde se text láme po písmenech */
 @media (max-width: 1180px){
   .hero-grid{
     grid-template-columns: 1fr;
   }
 }
+
 /* ================= MOBILE ================= */
 @media (max-width: 980px){
   .hero-grid{ grid-template-columns: 1fr; padding: 20px; }
@@ -540,22 +577,4 @@ main{ margin-top: 18px; }
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; scroll-behavior:auto !important; }
   .art-bg{ transform: none !important; }
-}
-p { 
-  overflow-wrap: anywhere;
-  word-break: keep-all;
-  hyphens: none;
-}
-/* Links styled as primary accent (like buttons), dotted underline */
-a{
-  color: var(--amber);
-  text-decoration-line: underline;
-  text-decoration-style: dotted;
-  text-decoration-color: rgba(215,162,74,0.65);
-  text-underline-offset: 3px;
-}
-
-a:hover{
-  color: #f0c26b;
-  text-decoration-color: rgba(215,162,74,0.95);
 }
