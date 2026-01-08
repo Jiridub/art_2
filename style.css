@@ -541,3 +541,8 @@ main{ margin-top: 18px; }
   *{ transition:none !important; scroll-behavior:auto !important; }
   .art-bg{ transform: none !important; }
 }
+p { 
+  overflow-wrap: anywhere;
+  word-break: normal;
+  hyphens: none;
+}
