@@ -12,7 +12,7 @@
   const APPS_SCRIPT_URL = "doplnit_APPS_SCRIPT_WEBAPP_URL";
 
   // Sdílené tajemství (doporučené)
-  const SECRET = "doplnit_SECRET";
+  const SECRET = "JDM_secret_token";
 
   function setStatus(msg, kind) {
     if (!statusEl) return;
@@ -49,18 +49,24 @@
     return "";
   }
 
+  // držíme reference, aby Safari request nezabil (Image beacon fallback)
+  window.__JDM_BEACONS__ = window.__JDM_BEACONS__ || [];
+
   function toQueryString(obj) {
-    const parts = [];
+    // robustnější než ruční encode (řeší diakritiku + edge-cases)
+    const params = new URLSearchParams();
     const keys = Object.keys(obj);
     for (let i = 0; i < keys.length; i++) {
       const k = keys[i];
-      parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(obj[k]));
+      params.set(k, String(obj[k] ?? ""));
     }
-    return parts.join("&");
+    // anti-cache + jednoznačnost requestu
+    params.set("t", String(Date.now()));
+    return params.toString();
   }
 
   function beaconSend(url, payload) {
-    // Prefer sendBeacon
+    // 1) Prefer sendBeacon (POST) — nejspolehlivější při opuštění stránky
     try {
       if (navigator.sendBeacon) {
         const blob = new Blob([payload], {
@@ -71,7 +77,7 @@
       }
     } catch (e) { /* ignore */ }
 
-    // Fallback 1: fetch keepalive
+    // 2) Fallback: fetch keepalive (POST)
     try {
       return fetch(url, {
         method: "POST",
@@ -82,13 +88,20 @@
       }).then(() => true).catch(() => false);
     } catch (e) { /* ignore */ }
 
-    // Fallback 2: Image ping GET
+    // 3) Fallback: Image ping GET (držet referenci kvůli Safari)
     return new Promise((resolve) => {
       try {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
         const sep = url.includes("?") ? "&" : "?";
+        const img = new Image();
+        window.__JDM_BEACONS__.push(img);
+
+        const cleanup = () => {
+          const i = window.__JDM_BEACONS__.indexOf(img);
+          if (i >= 0) window.__JDM_BEACONS__.splice(i, 1);
+        };
+
+        img.onload = () => { cleanup(); resolve(true); };
+        img.onerror = () => { cleanup(); resolve(false); };
         img.src = url + sep + payload;
       } catch (e) {
         resolve(false);
