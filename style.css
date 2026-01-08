@@ -101,34 +101,27 @@ body::after{
 }
 
 /* ================= TYPOGRAPHY (WRAPPING FIX) ================= */
-/* Paragraphs in Czech: do NOT auto-break words or auto-hyphenate */
-p{
+/* Stabilní zalamování pro češtinu:
+   - normální mezery a slova se nelámou “po písmenech”
+   - když přijde nezlomitelný token, rozumně se zlomí (break-word) */
+p, li{
   white-space: normal;
-  overflow-wrap: normal;
   word-break: normal;
+  overflow-wrap: break-word; /* klíčové */
   hyphens: none;
+  max-width: 100%;
 }
 
-/* Lists: same idea */
-li{
-  overflow-wrap: normal;
-  word-break: normal;
-  hyphens: none;
+/* Bez experimentálních vlastností, co Safari umí rozbít */
+.section p, .card p{
+  max-width: 100%;
 }
 
-/* Only break things that can be unbreakable (URLs / long tokens) */
+/* Jen pro věci, co se typicky nedají zalomit (URL, kód, dlouhé tokeny) */
 a, .status, .fineprint, code{
   overflow-wrap: anywhere;
   word-break: break-word;
   hyphens: none;
-}
-
-/* Make section intros prettier (optional but helps a lot visually) */
-.section p{
-  text-wrap: pretty;
-}
-.section h2{
-  text-wrap: balance;
 }
 
 /* ================= LINKS (VISIBLE, ACCENT, DOTTED) ================= */
@@ -466,9 +459,6 @@ main{ margin-top: 18px; }
 }
 
 /* ================= STEPS ================= */
-/* Hard fix:
-   - cards never get too narrow
-   - step header flex can't squeeze h3 into vertical "letter stack" */
 .steps{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -526,7 +516,6 @@ main{ margin-top: 18px; }
   color: rgba(255,255,255,0.92);
   letter-spacing: -0.01em;
 
-  /* critical: don't allow weird squeeze */
   flex: 1 1 auto;
   min-width: 0;
 }
@@ -564,7 +553,7 @@ main{ margin-top: 18px; }
   .hero-grid{ grid-template-columns: 1fr; padding: 20px; }
   .row{ grid-template-columns: 1fr; }
   .hero-bg{ opacity: 0.08; }
-  .steps{ grid-template-columns: 1fr; } /* keep it clean on small widths */
+  .steps{ grid-template-columns: 1fr; }
 }
 
 @media (max-width: 420px){
