@@ -1,0 +1,4 @@
+Contact: mailto:art.jiridubsky@gmail.com
+Preferred-Languages: cs, en
+Canonical: https://www.jiridubskymuller.eu/.well-known/security.txt
+Policy: https://www.jiridubskymuller.eu/GDPR
