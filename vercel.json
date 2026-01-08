@@ -1,0 +1,39 @@
+{
+  "headers": [
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/art-business",
+      "destination": "/art-business/",
+      "permanent": true
+    },
+    {
+      "source": "/SC_repy",
+      "destination": "https://tally.so/r/xXjMrd",
+      "permanent": false
+    },
+    {
+      "source": "/GDPR",
+      "destination": "/gdpr.html",
+      "permanent": true
+    },
+    {
+      "source": "/landingpage1.html",
+      "destination": "/landingpage1",
+      "permanent": true
+    }
+  ]
+}
