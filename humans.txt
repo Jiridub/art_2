@@ -1,0 +1,16 @@
+/* TEAM */
+Art Manager & Dealer: Jiří Dubský Müller
+Mentor: Joe Muczka Jr.
+Website: https://www.jiridubskymuller.eu
+LinkedIn: https://www.linkedin.com/in/jiridubskymuller
+
+/* THANKS */
+Clients, collectors, private investors
+
+/* TECHNOLOGY */
+HTML5, CSS3, Vanilla JS
+Google Apps Script
+Static hosting
+
+/* LOCATION */
+Czech Republic
