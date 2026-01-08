@@ -543,7 +543,7 @@ main{ margin-top: 18px; }
 }
 p { 
   overflow-wrap: anywhere;
-  word-break: normal;
+  word-break: keep-all;
   hyphens: none;
 }
 /* Links styled as primary accent (like buttons), dotted underline */
